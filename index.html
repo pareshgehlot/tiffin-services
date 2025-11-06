@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiffin Services Platform</title>
+    <link rel="stylesheet" href="frontend/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav">
+        <div class="logo">TiffinHub</div>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#admin">Admin</a>
+          <a href="#customer">Customers</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+      <div class="hero-content">
+        <h1>Full-service platform to run your tiffin business</h1>
+        <p>
+          Manage menus, plans, promotions, orders, deliveries, and customer experience in one
+          modern dashboard. Launch quickly with an in-memory NestJS backend and responsive web
+          experience that can be hosted on GitHub Pages.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#admin">Explore Admin Dashboard</a>
+          <a class="btn secondary" href="#customer">Preview Customer Journey</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="card">
+          <h3>Upcoming Deliveries</h3>
+          <ul>
+            <li>
+              <span class="accent">Today</span>
+              <div class="details">
+                <strong>Classic Veggie Tiffin</strong>
+                <small>Downtown • Interac • Out for delivery</small>
+              </div>
+            </li>
+            <li>
+              <span class="accent">Tomorrow</span>
+              <div class="details">
+                <strong>Protein Power Lunch</strong>
+                <small>Maple Ave • Credit Card • Scheduled</small>
+              </div>
+            </li>
+            <li>
+              <span class="accent">Friday</span>
+              <div class="details">
+                <strong>Weekend Comfort Combo</strong>
+                <small>Pickup • Cash • Ready at kitchen</small>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="features" class="section features">
+        <h2>Run every part of your tiffin service</h2>
+        <div class="feature-grid">
+          <article>
+            <h3>Menu Management</h3>
+            <p>
+              Build weekly menus with mouth-watering imagery, customize tiffin contents, and set
+              different price points per plan.
+            </p>
+          </article>
+          <article>
+            <h3>Flexible Plans</h3>
+            <p>
+              Offer daily, weekly, and monthly subscriptions with automated billing guidance and
+              loyalty perks.
+            </p>
+          </article>
+          <article>
+            <h3>Promotions &amp; Campaigns</h3>
+            <p>
+              Highlight festive menus or seasonal offers with promo codes and limited-time
+              discounts.
+            </p>
+          </article>
+          <article>
+            <h3>Unified Orders</h3>
+            <p>
+              Track pickup, delivery, and guest checkouts in one queue with live delivery
+              monitoring.
+            </p>
+          </article>
+          <article>
+            <h3>Payments &amp; Integrations</h3>
+            <p>
+              Configure credit card processors, Interac e-transfer settings, and pickup cash flows
+              directly inside the admin panel.
+            </p>
+          </article>
+          <article>
+            <h3>Customer Delight</h3>
+            <p>
+              Customers can re-order, maintain address books, and sign in via email, Google, Apple,
+              or phone OTP verification.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="admin" class="section admin">
+        <div class="section-header">
+          <h2>Admin control center</h2>
+          <p>
+            Secure login with the default credentials <code>gehlot.paresh2@gmail.com</code> and
+            <code>@Cathas9lives</code>. Manage menus, plans, promotions, deliveries, payments, and
+            Google review integrations from one dashboard.
+          </p>
+        </div>
+        <div class="dashboard">
+          <div class="panel">
+            <h3>Admin Login</h3>
+            <form id="admin-login-form">
+              <label>
+                Email
+                <input type="email" name="email" value="gehlot.paresh2@gmail.com" required />
+              </label>
+              <label>
+                Password
+                <input type="password" name="password" value="@Cathas9lives" required />
+              </label>
+              <button type="submit" class="btn primary">Log In</button>
+            </form>
+            <p class="form-feedback" id="admin-login-feedback"></p>
+            <div class="token-display" id="admin-token" hidden>
+              <p>
+                Session token:
+                <span id="admin-token-value"></span>
+              </p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Create / Update Tiffin</h3>
+            <form id="tiffin-form">
+              <label>
+                Tiffin Name
+                <input type="text" name="name" placeholder="Classic Veggie" required />
+              </label>
+              <label>
+                Description
+                <textarea name="description" rows="2" placeholder="Wholesome veg thali"></textarea>
+              </label>
+              <label>
+                Price
+                <input type="number" name="price" min="0" step="0.01" required />
+              </label>
+              <label>
+                Image URL
+                <input type="url" name="imageUrl" placeholder="https://" />
+              </label>
+              <label>
+                Items Included (comma separated)
+                <input type="text" name="itemsIncluded" placeholder="Dal, Roti, Rice, Salad" />
+              </label>
+              <button type="submit" class="btn secondary">Save Tiffin</button>
+            </form>
+            <p class="form-feedback" id="tiffin-feedback"></p>
+          </div>
+
+          <div class="panel">
+            <h3>Promotions</h3>
+            <form id="promotion-form">
+              <label>
+                Title
+                <input type="text" name="title" placeholder="Diwali Feast" required />
+              </label>
+              <label>
+                Description
+                <textarea name="description" rows="2" placeholder="Festive sweets on us!"></textarea>
+              </label>
+              <label>
+                Discount %
+                <input type="number" name="discountPercent" min="0" max="100" required />
+              </label>
+              <label>
+                Valid Until
+                <input type="date" name="validUntil" />
+              </label>
+              <button type="submit" class="btn secondary">Publish Promotion</button>
+            </form>
+            <p class="form-feedback" id="promotion-feedback"></p>
+          </div>
+
+          <div class="panel">
+            <h3>Payment &amp; Integrations</h3>
+            <form id="payment-form">
+              <label class="checkbox">
+                <input type="checkbox" name="allowCashOnDelivery" checked /> Allow cash on pickup/delivery
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="allowCreditCard" checked /> Allow credit card payments
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="allowInterac" checked /> Allow Interac e-transfers
+              </label>
+              <label>
+                Credit Card Processor
+                <input type="text" name="creditCardProcessor" placeholder="Stripe" />
+              </label>
+              <label>
+                Processor Public Key
+                <input type="text" name="processorPublicKey" placeholder="pk_test..." />
+              </label>
+              <label>
+                Processor Secret Key
+                <input type="text" name="processorSecretKey" placeholder="sk_test..." />
+              </label>
+              <label>
+                Interac Recipient Email
+                <input type="email" name="interacRecipientEmail" placeholder="payments@tiffinhub.ca" />
+              </label>
+              <label>
+                Notes
+                <textarea name="notes" rows="2" placeholder="Document credentials and onboarding steps"></textarea>
+              </label>
+              <button type="submit" class="btn secondary">Save Settings</button>
+            </form>
+            <p class="form-feedback" id="payment-feedback"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="customer" class="section customer">
+        <div class="section-header">
+          <h2>Customer experience</h2>
+          <p>
+            Guests can order without signing up. Registered users can verify by OTP, manage
+            addresses, reorder, and pay with cash, credit card, or Interac e-transfer.
+          </p>
+        </div>
+        <div class="customer-grid">
+          <div class="panel">
+            <h3>Sign up or Guest Checkout</h3>
+            <form id="customer-signup-form">
+              <label>
+                Name
+                <input type="text" name="name" placeholder="Priya Sharma" required />
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" placeholder="priya@example.com" />
+              </label>
+              <label>
+                Phone (+country)
+                <input type="tel" name="phone" placeholder="+16475551234" />
+              </label>
+              <button type="submit" class="btn primary">Create Account</button>
+            </form>
+            <p class="form-feedback" id="customer-signup-feedback"></p>
+          </div>
+
+          <div class="panel">
+            <h3>Place an Order</h3>
+            <form id="order-form">
+              <label>
+                Customer ID (optional)
+                <input type="text" name="customerId" placeholder="auto filled after sign up" />
+              </label>
+              <label>
+                Guest Email
+                <input type="email" name="guestEmail" placeholder="guest@example.com" />
+              </label>
+              <label>
+                Tiffin ID
+                <input type="text" name="tiffinId" placeholder="Copy from menu below" required />
+              </label>
+              <label>
+                Plan ID
+                <input type="text" name="planId" placeholder="Optional" />
+              </label>
+              <label>
+                Payment Method
+                <select name="paymentMethod">
+                  <option value="cash">Cash</option>
+                  <option value="credit-card">Credit Card</option>
+                  <option value="interac">Interac e-Transfer</option>
+                </select>
+              </label>
+              <label>
+                Order Total ($)
+                <input type="number" name="total" min="0" step="0.01" required />
+              </label>
+              <details>
+                <summary>Add delivery address</summary>
+                <div class="details-grid">
+                  <input type="text" name="label" placeholder="Home" />
+                  <input type="text" name="street" placeholder="123 King St" />
+                  <input type="text" name="city" placeholder="Toronto" />
+                  <input type="text" name="postalCode" placeholder="M5V1E3" />
+                  <input type="text" name="instructions" placeholder="Leave at door" />
+                </div>
+              </details>
+              <button type="submit" class="btn secondary">Submit Order</button>
+            </form>
+            <p class="form-feedback" id="order-feedback"></p>
+          </div>
+
+          <div class="panel highlights">
+            <h3>Live Menu &amp; Promotions</h3>
+            <div class="highlight-block">
+              <h4>Weekly Menu</h4>
+              <ul id="weekly-menu-list"></ul>
+            </div>
+            <div class="highlight-block">
+              <h4>Available Tiffins</h4>
+              <ul id="tiffin-list"></ul>
+            </div>
+            <div class="highlight-block">
+              <h4>Promotions</h4>
+              <ul id="promotion-list"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="section pricing">
+        <h2>Subscription plans</h2>
+        <div class="plans" id="plans"></div>
+      </section>
+
+      <section class="section reviews" id="reviews">
+        <h2>What customers are saying</h2>
+        <div class="reviews-grid" id="reviews-grid"></div>
+        <p class="muted">
+          Tip: connect your Google Business Profile inside the admin settings and the system can
+          surface verified Google reviews here automatically.
+        </p>
+      </section>
+
+      <section class="section roadmap">
+        <h2>Enhancement ideas</h2>
+        <ul class="roadmap-list">
+          <li>
+            Integrate payment gateways like Stripe, Square, or Moneris directly using the credentials
+            captured in the admin panel. Offer saved cards and recurring billing for subscribers.
+          </li>
+          <li>
+            Connect with SMS providers (Twilio, MessageBird) to deliver OTPs and real-time delivery
+            notifications. Add WhatsApp and email updates.
+          </li>
+          <li>
+            Build analytics for order volume, customer retention, meal popularity, and delivery
+            performance to optimize kitchen operations.
+          </li>
+          <li>
+            Launch a loyalty program with reward points, referral bonuses, and corporate bulk plans.
+          </li>
+          <li>
+            Extend delivery management with driver assignment, route optimization, and proof-of-
+            delivery photo capture.
+          </li>
+          <li>
+            Create a marketplace listing where partner kitchens can onboard, upload compliance docs,
+            and manage their menus under your brand umbrella.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer id="contact" class="footer">
+      <div>
+        <h3>Need help launching?</h3>
+        <p>Email us at <a href="mailto:hello@tiffinhub.ca">hello@tiffinhub.ca</a></p>
+      </div>
+      <div>
+        <h3>API base URL</h3>
+        <p>
+          <label>
+            <span>Configure backend URL</span>
+            <input type="url" id="api-base" value="http://localhost:3000" />
+          </label>
+        </p>
+      </div>
+      <p class="muted">© 2024 TiffinHub Platform. Crafted with NestJS + responsive web design.</p>
+    </footer>
+
+    <script src="frontend/scripts.js" type="module"></script>
+  </body>
+</html>
