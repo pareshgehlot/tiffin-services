@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TiffinHub – Smart tiffin delivery platform</title>
+    <link rel="stylesheet" href="frontend/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="top-nav">
+        <div class="brand">TiffinHub</div>
+        <input type="checkbox" id="nav-toggle" />
+        <label class="toggle" for="nav-toggle">☰</label>
+        <div class="nav-links">
+          <a href="#promotions">Promotions</a>
+          <a href="#plans">Plans</a>
+          <a href="#instant-order">Instant Order</a>
+          <a href="#dashboards">Dashboards</a>
+          <a href="#reviews">Reviews</a>
+        </div>
+      </nav>
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="badge">Modern meal subscriptions</span>
+          <h1>Launch a full-fledged tiffin business with one connected platform.</h1>
+          <p>
+            Craft menus, manage orders, sync Google reviews, and delight diners with seamless delivery.
+            Built with a NestJS backend, responsive frontend, and ready for GitHub Pages hosting.
+          </p>
+          <div class="cta-group">
+            <a class="btn primary" href="#instant-order">Place an instant tiffin order</a>
+            <a class="btn ghost" href="#dashboards">Explore dashboards</a>
+          </div>
+          <div class="api-selector">
+            <label for="api-base">API base URL</label>
+            <input type="url" id="api-base" value="http://localhost:3000" placeholder="http://localhost:3000" />
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="summary-card">
+            <h3>Today's Highlights</h3>
+            <ul id="hero-highlights"></ul>
+          </div>
+          <div class="summary-card">
+            <h3>Weekly Menu Preview</h3>
+            <ul id="hero-menu"></ul>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section id="promotions" class="section promotions">
+        <div class="section-heading">
+          <h2>Fresh promotions &amp; community buzz</h2>
+          <p>Spotlight seasonal menus, rewards, and cross-platform reviews synced from Google.</p>
+        </div>
+        <div class="promo-grid" id="promotions-grid"></div>
+      </section>
+
+      <section id="plans" class="section plans">
+        <div class="section-heading">
+          <h2>Plans crafted for every appetite</h2>
+          <p>Bundle your tiffins into delightful subscriptions. Update pricing in real-time.</p>
+        </div>
+        <div class="plan-grid" id="plan-grid"></div>
+      </section>
+
+      <section class="section features" id="features">
+        <div class="feature-grid">
+          <article>
+            <h3>Menu intelligence</h3>
+            <p>
+              Schedule chef specials for each day of the week, upload imagery, and reorder ingredients with one
+              click.
+            </p>
+          </article>
+          <article>
+            <h3>Payments made simple</h3>
+            <p>
+              Configure credit card processors, Interac e-transfer recipients, and cash-on-delivery preferences in a
+              single settings pane.
+            </p>
+          </article>
+          <article>
+            <h3>Engaged communities</h3>
+            <p>
+              Encourage loyalty with re-order nudges, guest checkout, delivery status updates, and verified phone OTP
+              flows.
+            </p>
+          </article>
+          <article>
+            <h3>Insights for every role</h3>
+            <p>
+              Admins, customers, and delivery drivers each receive tailored dashboards with the latest orders and
+              assignments.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="instant-order" class="section instant-order">
+        <div class="section-heading">
+          <h2>Place an instant tiffin order</h2>
+          <p>Guest orders are welcome—authenticated customers enjoy saved addresses and rapid re-orders.</p>
+        </div>
+        <form id="order-form" class="card">
+          <div class="form-row">
+            <label for="order-tiffin">Select tiffin</label>
+            <select id="order-tiffin" name="tiffinId" required></select>
+          </div>
+          <div class="form-row">
+            <label for="order-plan">Attach plan (optional)</label>
+            <select id="order-plan" name="planId">
+              <option value="">One-time order</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Guest contact email</label>
+            <input type="email" name="guestEmail" placeholder="guest@example.com" />
+          </div>
+          <div class="form-row">
+            <label>Guest phone</label>
+            <input type="tel" name="guestPhone" placeholder="+1 416 555 1234" />
+          </div>
+          <div class="form-row">
+            <label>Payment method</label>
+            <select name="paymentMethod">
+              <option value="cash">Cash on delivery / pickup</option>
+              <option value="credit-card">Credit card</option>
+              <option value="interac">Interac e-transfer</option>
+            </select>
+          </div>
+          <div class="address-grid">
+            <div>
+              <label>Street address</label>
+              <input type="text" name="street" placeholder="123 Spice Route" />
+            </div>
+            <div>
+              <label>City</label>
+              <input type="text" name="city" placeholder="Toronto" />
+            </div>
+            <div>
+              <label>Postal code</label>
+              <input type="text" name="postalCode" placeholder="M5V 2T6" />
+            </div>
+            <div>
+              <label>Delivery notes</label>
+              <input type="text" name="instructions" placeholder="Buzz 1202, leave at concierge" />
+            </div>
+          </div>
+          <button type="submit" class="btn primary">Submit order</button>
+          <p class="form-feedback" id="order-feedback"></p>
+        </form>
+      </section>
+
+      <section id="dashboards" class="section dashboards">
+        <div class="section-heading">
+          <h2>Role-specific dashboards</h2>
+          <p>Secure logins ensure each teammate sees the insights and actions tailored to their day.</p>
+        </div>
+        <div class="dashboard-grid">
+          <article class="dashboard-card" data-role="admin">
+            <header>
+              <h3>Admin control room</h3>
+              <p>Default credentials: <code>gehlot.paresh2@gmail.com</code> / <code>@Cathas9lives</code></p>
+            </header>
+            <form id="admin-login-form" class="stacked-form">
+              <label>Email or phone<input type="text" name="identifier" value="gehlot.paresh2@gmail.com" required /></label>
+              <label>Password<input type="password" name="password" value="@Cathas9lives" required /></label>
+              <button type="submit" class="btn primary">Log in</button>
+              <p class="form-feedback" id="admin-login-feedback"></p>
+            </form>
+            <div class="dashboard-content" id="admin-dashboard" hidden>
+              <div class="dashboard-actions">
+                <section class="card">
+                  <h4>Create team member</h4>
+                  <form id="admin-create-user-form" class="compact-grid">
+                    <label>Full name<input type="text" name="name" required /></label>
+                    <label>Email<input type="email" name="email" /></label>
+                    <label>Phone<input type="tel" name="phone" /></label>
+                    <label>Role
+                      <select name="role" required>
+                        <option value="admin">Admin</option>
+                        <option value="customer">Customer</option>
+                        <option value="driver">Driver</option>
+                      </select>
+                    </label>
+                    <label>Temporary password<input type="password" name="password" placeholder="Auto-generate if blank" /></label>
+                    <label class="checkbox"><input type="checkbox" name="verified" /> Mark as verified</label>
+                    <button type="submit" class="btn secondary">Save user</button>
+                    <p class="form-feedback" id="admin-user-feedback"></p>
+                  </form>
+                </section>
+                <section class="card">
+                  <h4>Publish promotion</h4>
+                  <form id="admin-promo-form" class="compact-grid">
+                    <label>Title<input type="text" name="title" required /></label>
+                    <label>Description<textarea name="description" rows="2"></textarea></label>
+                    <label>Discount %<input type="number" name="discountPercent" min="0" max="100" required /></label>
+                    <label>Valid until<input type="date" name="validUntil" /></label>
+                    <label class="checkbox"><input type="checkbox" name="active" checked /> Active</label>
+                    <button type="submit" class="btn secondary">Publish</button>
+                    <p class="form-feedback" id="admin-promo-feedback"></p>
+                  </form>
+                </section>
+                <section class="card">
+                  <h4>Showcase tiffin</h4>
+                  <form id="admin-tiffin-form" class="compact-grid">
+                    <label>Name<input type="text" name="name" required /></label>
+                    <label>Description<textarea name="description" rows="2"></textarea></label>
+                    <label>Price<input type="number" step="0.01" name="price" required /></label>
+                    <label>Items (comma separated)<input type="text" name="itemsIncluded" /></label>
+                    <label>Image URL<input type="url" name="imageUrl" /></label>
+                    <button type="submit" class="btn secondary">Save tiffin</button>
+                    <p class="form-feedback" id="admin-tiffin-feedback"></p>
+                  </form>
+                </section>
+                <section class="card">
+                  <h4>Assign delivery</h4>
+                  <form id="admin-delivery-form" class="compact-grid">
+                    <label>Delivery ID<input type="text" name="id" placeholder="Existing delivery id" required /></label>
+                    <label>Driver ID<input type="text" name="driverId" placeholder="Driver user id" /></label>
+                    <label>Status
+                      <select name="status">
+                        <option value="scheduled">Scheduled</option>
+                        <option value="enroute">Enroute</option>
+                        <option value="delivered">Delivered</option>
+                      </select>
+                    </label>
+                    <button type="submit" class="btn secondary">Update delivery</button>
+                    <p class="form-feedback" id="admin-delivery-feedback"></p>
+                  </form>
+                </section>
+              </div>
+              <section class="card stretch">
+                <header class="card-header">
+                  <h4>Live overview</h4>
+                  <button id="admin-refresh" class="btn ghost">Refresh data</button>
+                </header>
+                <div class="overview-grid">
+                  <div>
+                    <h5>Team directory</h5>
+                    <ul id="admin-user-list" class="mini-list"></ul>
+                  </div>
+                  <div>
+                    <h5>Open orders</h5>
+                    <ul id="admin-order-list" class="mini-list"></ul>
+                  </div>
+                  <div>
+                    <h5>Deliveries</h5>
+                    <ul id="admin-delivery-list" class="mini-list"></ul>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </article>
+
+          <article class="dashboard-card" data-role="customer">
+            <header>
+              <h3>Customer lounge</h3>
+              <p>Login via email + password or register with phone &amp; OTP to unlock saved favorites.</p>
+            </header>
+            <form id="customer-login-form" class="stacked-form">
+              <label>Email<input type="email" name="email" placeholder="you@example.com" /></label>
+              <span class="or">or</span>
+              <label>Phone<input type="tel" name="phone" placeholder="+1 416 555 7890" /></label>
+              <label>Password<input type="password" name="password" placeholder="Minimum 6 characters" required /></label>
+              <button type="submit" class="btn primary">Access customer dashboard</button>
+              <p class="form-feedback" id="customer-login-feedback"></p>
+            </form>
+            <div class="dashboard-content" id="customer-dashboard" hidden>
+              <section class="card">
+                <header class="card-header">
+                  <h4>Your saved profile</h4>
+                  <button id="customer-refresh" class="btn ghost">Refresh</button>
+                </header>
+                <div id="customer-profile"></div>
+              </section>
+              <section class="card stretch">
+                <h4>Order history</h4>
+                <ul id="customer-orders" class="mini-list"></ul>
+              </section>
+            </div>
+          </article>
+
+          <article class="dashboard-card" data-role="driver">
+            <header>
+              <h3>Driver dispatch</h3>
+              <p>Track active routes, confirm deliveries, and keep customers informed in real-time.</p>
+            </header>
+            <form id="driver-login-form" class="stacked-form">
+              <label>Email or phone<input type="text" name="identifier" placeholder="driver@tiffinhub.ca" required /></label>
+              <label>Password<input type="password" name="password" placeholder="Minimum 6 characters" required /></label>
+              <button type="submit" class="btn primary">Log in</button>
+              <p class="form-feedback" id="driver-login-feedback"></p>
+            </form>
+            <div class="dashboard-content" id="driver-dashboard" hidden>
+              <section class="card">
+                <header class="card-header">
+                  <h4>Assigned deliveries</h4>
+                  <button id="driver-refresh" class="btn ghost">Refresh</button>
+                </header>
+                <ul id="driver-deliveries" class="mini-list"></ul>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="reviews" class="section reviews">
+        <div class="section-heading">
+          <h2>Loved by local foodies</h2>
+          <p>Bring Google reviews front and centre to build trust instantly.</p>
+        </div>
+        <div class="review-grid" id="review-grid"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> TiffinHub. Crafted with NestJS, ready for GitHub Pages.</p>
+    </footer>
+
+    <script src="frontend/scripts.js" type="module"></script>
+  </body>
+</html>
